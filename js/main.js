@@ -53,6 +53,7 @@ let activeTile = undefined;
 let enemyCount = 3;
 let heart = 10;
 let money = 100;
+const explosions = [];
 spawnEnemies(enemyCount);
 
 function animate() {
@@ -72,6 +73,16 @@ function animate() {
         cancelAnimationFrame(animationId);
         gameOver.style.display = 'flex';
       }
+    }
+  }
+
+  for (let i = explosions.length - 1; i >= 0; i--) {
+    const explosion = explosions[i];
+    explosion.draw();
+    explosion.update();
+
+    if (explosion.frames.current >= explosion.frames.max - 1) {
+      explosions.splice(i, 1);
     }
   }
 
@@ -120,6 +131,17 @@ function animate() {
           }
         }
 
+        explosions.push(
+          new Sprite({
+            position: {
+              x: projectile.position.x,
+              y: projectile.position.y,
+            },
+            imageSrc: './assets/img/explosion.png',
+            frames: { max: 4 },
+            offset: { x: 0, y: 0 },
+          })
+        );
         building.projectiles.splice(i, 1);
       }
     }
@@ -144,6 +166,9 @@ canvas.addEventListener('click', (event) => {
       })
     );
     activeTile.isOccupied = true;
+    buildings.sort((a, b) => {
+      return a.position.y - b.position.y;
+    });
   }
 });
 
