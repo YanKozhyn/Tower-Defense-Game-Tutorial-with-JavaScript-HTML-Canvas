@@ -31,8 +31,6 @@ placementTilesData2D.forEach((row, y) => {
   });
 });
 
-console.log(placementTiles);
-
 const image = new Image();
 
 image.src = 'assets/gameMap.png';
@@ -53,17 +51,33 @@ function spawnEnemies(spawnCount) {
 const buildings = [];
 let activeTile = undefined;
 let enemyCount = 3;
-
+let hearts = 10;
 spawnEnemies(enemyCount);
 
 function animate() {
-  requestAnimationFrame(animate);
+  const animationId = requestAnimationFrame(animate);
 
   ctx.drawImage(image, 0, 0);
 
   for (let i = enemies.length - 1; i >= 0; i--) {
     const enemy = enemies[i];
     enemy.update();
+
+    if (enemy.position.x > canvas.width) {
+      hearts -= 1;
+      enemies.splice(i, 1);
+      console.log(hearts);
+      if (hearts === 0) {
+        cancelAnimationFrame(animationId);
+        gameOver.style.display = 'flex';
+      }
+    }
+  }
+
+  //tracking total amount of enemies
+  if (enemies.length === 0) {
+    enemyCount += 2;
+    spawnEnemies(enemyCount);
   }
 
   placementTiles.forEach((tile) => {
@@ -101,13 +115,6 @@ function animate() {
           if (enemyIndex > -1) enemies.splice(enemyIndex, 1);
         }
 
-        //tracking total amount of enemies
-        if (enemies.length === 0) {
-          enemyCount += 2;
-          spawnEnemies(8);
-        }
-
-        console.log(projectile.enemy.health);
         building.projectiles.splice(i, 1);
       }
     }
@@ -131,7 +138,6 @@ canvas.addEventListener('click', (event) => {
     );
     activeTile.isOccupied = true;
   }
-  console.log(buildings);
 });
 
 window.addEventListener('mousemove', (event) => {
