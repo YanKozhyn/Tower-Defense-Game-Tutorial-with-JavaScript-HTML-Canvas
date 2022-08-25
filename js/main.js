@@ -51,7 +51,8 @@ function spawnEnemies(spawnCount) {
 const buildings = [];
 let activeTile = undefined;
 let enemyCount = 3;
-let hearts = 10;
+let heart = 10;
+let money = 100;
 spawnEnemies(enemyCount);
 
 function animate() {
@@ -64,10 +65,10 @@ function animate() {
     enemy.update();
 
     if (enemy.position.x > canvas.width) {
-      hearts -= 1;
+      heart -= 1;
       enemies.splice(i, 1);
-      console.log(hearts);
-      if (hearts === 0) {
+      hearts.innerHTML = heart;
+      if (heart === 0) {
         cancelAnimationFrame(animationId);
         gameOver.style.display = 'flex';
       }
@@ -112,7 +113,11 @@ function animate() {
           const enemyIndex = enemies.findIndex((enemy) => {
             return projectile.enemy === enemy;
           });
-          if (enemyIndex > -1) enemies.splice(enemyIndex, 1);
+          if (enemyIndex > -1) {
+            enemies.splice(enemyIndex, 1);
+            money += 25;
+            coins.innerHTML = money;
+          }
         }
 
         building.projectiles.splice(i, 1);
@@ -127,7 +132,9 @@ const mouse = {
 };
 
 canvas.addEventListener('click', (event) => {
-  if (activeTile && !activeTile.isOccupied) {
+  if (activeTile && !activeTile.isOccupied && money - 50 >= 0) {
+    money -= 50;
+    coins.innerHTML = money;
     buildings.push(
       new Building({
         position: {

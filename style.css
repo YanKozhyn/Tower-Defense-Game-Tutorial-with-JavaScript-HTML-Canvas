@@ -1,6 +1,6 @@
 body {
   background-color: black;
-  font-family: 'Press Start 2P', 'cursive'; 
+  font-family: 'Press Start 2P', 'cursive';
 }
 
 #gameOver {
@@ -15,10 +15,57 @@ body {
   font-size: 72px;
   color: whitesmoke;
   -webkit-text-stroke: 4px black;
-  
 }
 
 #pd {
   position: relative;
   display: inline-block;
+}
+
+#heart {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  font-size: 30px;
+  color: whitesmoke;
+  -webkit-text-stroke: 2px black;
+  display: flex;
+  align-items: center;
+}
+
+#heartIcon {
+  width: 40px;
+  color: rgb(255, 255, 255);
+  margin-right: 5px;
+}
+
+#daimr {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+#dai {
+  display: flex;
+  align-items: center;
+}
+
+#coinIcon {
+  width: 40px;
+  color: gold;
+  margin-right: 5px;
+}
+
+#ptrwhb {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 80px;
+  background: linear-gradient(
+    to left bottom,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0)
+  );
 }
