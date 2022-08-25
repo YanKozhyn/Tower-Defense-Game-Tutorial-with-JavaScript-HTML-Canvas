@@ -68,7 +68,7 @@ class Enemy {
     const xDistance = waypoint.x - this.center.x;
     const angle = Math.atan2(yDistance, xDistance);
 
-    const speed = 10;
+    const speed = 1.5;
 
     this.velocity.x = Math.cos(angle) * speed;
     this.velocity.y = Math.sin(angle) * speed;
@@ -118,7 +118,7 @@ class Projectile {
       this.enemy.center.x - this.position.x
     );
 
-    const power = 2.5;
+    const power = 3;
     this.velocity.x = Math.cos(angle) * power;
     this.velocity.y = Math.sin(angle) * power;
 
