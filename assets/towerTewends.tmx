@@ -105,7 +105,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="10" name="Placement Title" width="20" height="12">
+ <layer id="10" name="Placement Title" width="20" height="12" visible="0">
   <data encoding="csv">
 0,14,0,14,0,14,0,14,0,14,0,14,0,0,0,0,0,0,0,0,
 0,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
